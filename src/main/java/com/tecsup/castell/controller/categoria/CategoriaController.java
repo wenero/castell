@@ -1,4 +1,4 @@
-package com.tecsup.castell.controller.campain;
+package com.tecsup.castell.controller.categoria;
 
 import com.tecsup.castell.model.Categoria;
 import javax.validation.Valid;
@@ -38,13 +38,18 @@ public class CategoriaController {
     public String update(@PathVariable("id") Long id, Model model) {
 
         Categoria categoria = service.find(id);
+        
+        if(categoria==null){
+            return  "redirect:/categoria";
+        }
+        
         model.addAttribute("categoria", categoria);
 
         return "categoria/formulario";
     }
 
     @RequestMapping("save")
-    public String save(@ModelAttribute Categoria categoria, Model model, BindingResult result) {
+    public String save(@ModelAttribute Categoria categoria, Model model) {
 
         service.save(categoria);
         return "redirect:/categoria";

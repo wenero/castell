@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Vendedores</title>
+        <title>Campañas</title>
         <%@include file="/public/header.jsp" %>
     </head>
     <body>
@@ -15,24 +15,22 @@
 
                 <!-- CONTENIDO -->
                 <section class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <a href="<%=request.getContextPath()%>/adm/vendedor/create" class="btn btn-primary pull-right" >Nuevo</a>
-                    <h1 class="page-header">Vendedores</h1>
+                    <a href="<%=request.getContextPath()%>/campain/create" class="btn btn-primary pull-right" >Nuevo</a>
+                    <h1 class="page-header">Campañas</h1>
 
                     <table class="table table-hover table-striped">
 
                         <tr class="bg-info">
-                            <th width="70%">Nombres y Apellidos</th>
-                            <th width="20%">Email</th>
-                            <th width="10%">Estado</th>
+                            <th width="30%">Campain</th>
+                            <th width="50%">Programación</th>
+                            <th width="20%">Estado</th>
                             <th></th>
                         </tr>
 
-                        <c:forEach var="i" items="${vendedores}">
+                        <c:forEach var="i" items="${campains}">
                             <tr>
-                                <td><c:out value="${i.persona.nombreCompleto}"/></td>
-
-                                <td><c:out value="${i.persona.email}"/></td>
-
+                                <td><c:out value="${i.nombre}"/></td>
+                                <td><c:out value="${i.fechaInicio}"/> - <c:out value="${i.fechaFin}"/></td>
                                 <td>
                                     <c:if test="${i.estado == 'ACTIVO'}">
                                         <span class="label label-success"> <c:out value="${i.estado}"/> </span>
@@ -41,17 +39,14 @@
                                         <span class="label label-danger"> <c:out value="${i.estado}"/> </span>
                                     </c:if>
                                 </td>
-
                                 <td>
                                     <div class="btn-group">
                                         <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span>
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="<%=request.getContextPath()%>/adm/vendedor/estado/${i.id}">Activar/Desactivar</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="<%=request.getContextPath()%>/adm/vendedor/update/${i.id}">Editar</a></li>
-                                            <li><a href="<%=request.getContextPath()%>/adm/vendedor/delete/${i.id}">Eliminar</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/campain/update/${i.id}">Editar</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/campain/delete/${i.id}">Eliminar</a></li>
                                         </ul>
                                     </div>
                                 </td>
