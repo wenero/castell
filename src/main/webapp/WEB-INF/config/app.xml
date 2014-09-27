@@ -23,6 +23,13 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/app/" />
         <property name="suffix" value=".jsp"/>
+        <property name="order" value="1"/>
+    </bean>
+    
+    <!-- CONFIGURACION -->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location" value="/WEB-INF/config/views.xml" />
+        <property name="order" value="0"/>
     </bean>
     
     <task:annotation-driven/>

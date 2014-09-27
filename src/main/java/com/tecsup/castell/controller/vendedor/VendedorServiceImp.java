@@ -3,6 +3,7 @@ package com.tecsup.castell.controller.vendedor;
 import com.tecsup.castell.dao.PersonaDAO;
 import com.tecsup.castell.dao.UsuarioDAO;
 import com.tecsup.castell.dao.VendedorDAO;
+import com.tecsup.castell.helper.CastellException;
 import com.tecsup.castell.helper.EstadoEnum;
 import com.tecsup.castell.helper.RolEnum;
 import com.tecsup.castell.mail.MailerService;
@@ -72,12 +73,18 @@ public class VendedorServiceImp implements VendedorService {
 
     @Override
     public void delete(Long id) {
+        
         Vendedor vendedor = vendedorDAO.find(id);
+        
+        if(vendedor.getEstado().equals(EstadoEnum.ACTIVO.toString())){
+            throw  new CastellException("Error: Vendedor Activo");
+        }
+        
         Persona persona = vendedor.getPersona();
         Usuario usuario = persona.getUsuario();
-
-        usuarioDAO.delete(usuario);
-        vendedorDAO.delete(vendedor);
+        
+//        usuarioDAO.delete(usuario);
+//        vendedorDAO.delete(vendedor);
         personaDAO.delete(persona);
     }
 

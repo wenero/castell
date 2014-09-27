@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "persona")
@@ -19,13 +21,16 @@ public class Persona {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-
+    
+    @NotEmpty(message="Debe ingresar su apellido paterno.")
     @Column(name = "paterno")
     private String paterno;
-
+    
+    @NotEmpty(message="Debe ingresar su apellido materno.")
     @Column(name = "materno")
     private String materno;
-
+    
+    @NotEmpty(message="Debe ingresar sus nombres.")
     @Column(name = "nombres")
     private String nombres;
 
@@ -35,7 +40,9 @@ public class Persona {
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-
+    
+    @Email
+    @NotEmpty(message="Debe ingresar su corre electronico.")
     @Column(name = "email")
     private String email;
 
